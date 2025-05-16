@@ -60,7 +60,7 @@ jobs:
           #  install_packages: "gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross libstdc++-*-dev-arm64-cross"
           - name: m68k-generic
             triplet: m68k-linux-gnu
-            compiler: gcc-m68k-linux-gnu
+            compiler: m68k-linux-gnu-gcc
             cflags_extra: ""
             package_arch: m68k
             install_packages: "gcc-m68k-linux-gnu g++-m68k-linux-gnu libc6-dev-m68k-cross libstdc++-*-dev-m68k-cross"
@@ -72,7 +72,7 @@ jobs:
             install_packages: "gcc-powerpc-linux-gnu g++-powerpc-linux-gnu libc6-dev-powerpc-cross libstdc++-*-dev-powerpc-cross"
           - name: ppc64-be
             triplet: powerpc64-linux-gnu # 64-bit PowerPC Big Endian
-            compiler: gcc-powerpc64-linux-gnu
+            compiler: powerpc64-linux-gnu-gcc
             cflags_extra: ""
             package_arch: powerpc64
             # Omit libc6-dev-powerpc64-cross as it was not found
