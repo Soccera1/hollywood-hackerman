@@ -48,10 +48,10 @@ jobs:
             install_packages: "gcc g++"
           - name: i386-generic
             triplet: i686-linux-gnu # Use i686 for 32-bit x86 Linux
-            compiler: gcc-i686-linux-gnu
+            compiler: gcc
             cflags_extra: ""
             package_arch: i386
-            install_packages: "gcc-i686-linux-gnu g++-i686-linux-gnu libc6-dev-i386-cross libstdc++-*-dev-i386-cross"
+            install_packages: "libc6:i386 libstdc++6:i386 libgcc-s1:i386 libc6-dev:i386 gcc-multilib g++-multilib"
           #- name: aarch64-generic
           #  triplet: aarch64-linux-gnu
           #  compiler: gcc-aarch64-linux-gnu
