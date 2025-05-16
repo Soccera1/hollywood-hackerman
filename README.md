@@ -38,7 +38,7 @@ How to Install It and Become a Hacker Overlord
 
 Step 1: Clone like a professional criminal
 
-git clone https://github.com/YOU/Hollywood-Hackerman.git
+git clone https://github.com/Soccera1/Hollywood-Hackerman.git
 cd Hollywood-Hackerman
 
 Step 2: Build it like you're compiling the next zero-day
