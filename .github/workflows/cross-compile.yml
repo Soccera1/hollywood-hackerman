@@ -89,12 +89,12 @@ jobs:
           #  cflags_extra: ""
           #  package_arch: riscv64
           #  install_packages: "gcc-riscv64-linux-gnu g++-riscv64-linux-gnu libc6-dev-riscv64-cross libstdc++-*-dev-riscv64-cross"
-          - name: s390x-generic
-            triplet: s390x-linux-gnu
-            compiler: gcc-s390x-linux-gnu
-            cflags_extra: ""
-            package_arch: s390x
-            install_packages: "gcc-s390x-linux-gnu g++-s390x-linux-gnu libc6-dev-s390x-cross libstdc++-*-dev-s390x-cross"
+          #- name: s390x-generic
+          #  triplet: s390x-linux-gnu
+          #  compiler: gcc-s390x-linux-gnu
+          #  cflags_extra: ""
+          #  package_arch: s390x
+          #  install_packages: "gcc-s390x-linux-gnu g++-s390x-linux-gnu libc6-dev-s390x-cross libstdc++-*-dev-s390x-cross"
 
 
     steps:
