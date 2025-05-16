@@ -83,12 +83,12 @@ jobs:
           #  cflags_extra: ""
           #  package_arch: powerpc64el # Debian/Ubuntu uses powerpc64el for ppc64le packages
           #  install_packages: "gcc-powerpc64le-linux-gnu g++-powerpc64le-linux-gnu libc6-dev-powerpc64el-cross libstdc++-*-dev-powerpc64el-cross"
-          - name: riscv64-generic
-            triplet: riscv64-linux-gnu
-            compiler: gcc-riscv64-linux-gnu
-            cflags_extra: ""
-            package_arch: riscv64
-            install_packages: "gcc-riscv64-linux-gnu g++-riscv64-linux-gnu libc6-dev-riscv64-cross libstdc++-*-dev-riscv64-cross"
+          #- name: riscv64-generic
+          #  triplet: riscv64-linux-gnu
+          #  compiler: gcc-riscv64-linux-gnu
+          #  cflags_extra: ""
+          #  package_arch: riscv64
+          #  install_packages: "gcc-riscv64-linux-gnu g++-riscv64-linux-gnu libc6-dev-riscv64-cross libstdc++-*-dev-riscv64-cross"
           - name: s390x-generic
             triplet: s390x-linux-gnu
             compiler: gcc-s390x-linux-gnu
