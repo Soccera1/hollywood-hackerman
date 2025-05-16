@@ -77,12 +77,12 @@ jobs:
             package_arch: powerpc64
             # Omit libc6-dev-powerpc64-cross as it was not found
             install_packages: "gcc-powerpc64-linux-gnu g++-powerpc64-linux-gnu"
-          - name: ppc64-le
-            triplet: powerpc64le-linux-gnu # 64-bit PowerPC Little Endian
-            compiler: gcc-powerpc64le-linux-gnu
-            cflags_extra: ""
-            package_arch: powerpc64el # Debian/Ubuntu uses powerpc64el for ppc64le packages
-            install_packages: "gcc-powerpc64le-linux-gnu g++-powerpc64le-linux-gnu libc6-dev-powerpc64el-cross libstdc++-*-dev-powerpc64el-cross"
+          #- name: ppc64-le
+          #  triplet: powerpc64le-linux-gnu # 64-bit PowerPC Little Endian
+          #  compiler: gcc-powerpc64le-linux-gnu
+          #  cflags_extra: ""
+          #  package_arch: powerpc64el # Debian/Ubuntu uses powerpc64el for ppc64le packages
+          #  install_packages: "gcc-powerpc64le-linux-gnu g++-powerpc64le-linux-gnu libc6-dev-powerpc64el-cross libstdc++-*-dev-powerpc64el-cross"
           - name: riscv64-generic
             triplet: riscv64-linux-gnu
             compiler: gcc-riscv64-linux-gnu
