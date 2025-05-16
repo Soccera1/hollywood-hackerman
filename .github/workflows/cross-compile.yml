@@ -1,0 +1,124 @@
+name: Cross-Compile HHM
+
+on:
+  push:
+    branches:
+      - main # or your main development branch
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Define the target architectures and their corresponding GCC triplets
+        target:
+          - name: amd64-generic
+            triplet: x86_64-linux-gnu
+            compiler: gcc-x86-64-linux-gnu
+            cflags_extra: "" # No extra flags needed for generic
+            package_arch: amd64 # Native build, use host arch for packages
+          - name: amd64-v2
+            triplet: x86_64-linux-gnu
+            compiler: gcc-x86-64-linux-gnu
+            cflags_extra: -march=x86-64-v2 # Specify target microarchitecture
+            package_arch: amd64
+          - name: amd64-v3
+            triplet: x86_64-linux-gnu
+            compiler: gcc-x86-64-linux-gnu
+            cflags_extra: -march=x86-64-v3
+            package_arch: amd64
+          - name: amd64-v4
+            triplet: x86_64-linux-gnu
+            compiler: gcc-x86-64-linux-gnu
+            cflags_extra: -march=x86-64-v4
+            package_arch: amd64
+          - name: amd64-alderlake # Example of a specific CPU microarchitecture
+            triplet: x86_64-linux-gnu
+            compiler: gcc-x86-64-linux-gnu
+            cflags_extra: -march=alderlake
+            package_arch: amd64
+          - name: i386-generic
+            triplet: i686-linux-gnu # Use i686 for 32-bit x86 Linux
+            compiler: gcc-i686-linux-gnu
+            cflags_extra: ""
+            package_arch: i386
+          - name: aarch64-generic
+            triplet: aarch64-linux-gnu
+            compiler: gcc-aarch64-linux-gnu
+            cflags_extra: ""
+            package_arch: arm64 # Debian/Ubuntu uses arm64 for aarch64 packages
+          - name: m68k-generic
+            triplet: m68k-linux-gnu
+            compiler: gcc-m68k-linux-gnu
+            cflags_extra: ""
+            package_arch: m68k
+          - name: ppc-generic
+            triplet: powerpc-linux-gnu # 32-bit PowerPC
+            compiler: gcc-powerpc-linux-gnu
+            cflags_extra: ""
+            package_arch: powerpc
+          - name: ppc64-be
+            triplet: powerpc64-linux-gnu # 64-bit PowerPC Big Endian
+            compiler: gcc-powerpc64-linux-gnu
+            cflags_extra: ""
+            package_arch: powerpc64
+          - name: ppc64-le
+            triplet: powerpc64le-linux-gnu # 64-bit PowerPC Little Endian
+            compiler: gcc-powerpc64le-linux-gnu
+            cflags_extra: ""
+            package_arch: powerpc64el # Debian/Ubuntu uses powerpc64el for ppc64le packages
+          - name: riscv64-generic
+            triplet: riscv64-linux-gnu
+            compiler: gcc-riscv64-linux-gnu
+            cflags_extra: ""
+            package_arch: riscv64
+          - name: s390x-generic
+            triplet: s390x-linux-gnu
+            compiler: gcc-s390x-linux-gnu
+            cflags_extra: ""
+            package_arch: s390x
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up cross-compilation environment for ${{ matrix.target.name }}
+        run: |
+          # Enable multiarch for foreign architectures if needed
+          if [ "${{ matrix.target.package_arch }}" != "amd64" ]; then
+            sudo dpkg --add-architecture ${{ matrix.target.package_arch }}
+          fi
+          sudo apt-get update
+
+          # Install the cross-compiler and related libraries (focusing on gcc)
+          sudo apt-get install -y \
+            ${{ matrix.target.compiler }} \
+            libc6-dev-${{ matrix.target.package_arch }}-cross # C standard library dev files
+
+          # Install qemu-user-static for running binaries in emulation (optional)
+          sudo apt-get install -y qemu-user-static binfmt-support
+
+      - name: Compile for ${{ matrix.target.name }}
+        run: |
+          # Use the cross-compiler and specify the output filename
+          # Pass extra CFLAGS if defined in the matrix
+          make CC=${{ matrix.target.compiler }} CFLAGS="-Wall -Wextra -O3 -flto ${{ matrix.target.cflags_extra }}" TARGET=hhm-${{ matrix.target.name }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hhm-${{ matrix.target.name }}
+          path: hhm-${{ matrix.target.name }} # Path to the compiled executable
+
+      # This step runs only when the workflow is triggered by a release creation
+      - name: Upload Release Asset
+        if: github.event_name == 'release' && github.event.action == 'created'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: hhm-${{ matrix.target.name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
