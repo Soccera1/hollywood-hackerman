@@ -52,12 +52,12 @@ jobs:
             cflags_extra: ""
             package_arch: i386
             install_packages: "gcc-i686-linux-gnu g++-i686-linux-gnu libc6-dev-i386-cross libstdc++-*-dev-i386-cross"
-          - name: aarch64-generic
-            triplet: aarch64-linux-gnu
-            compiler: gcc-aarch64-linux-gnu
-            cflags_extra: ""
-            package_arch: arm64 # Debian/Ubuntu uses arm64 for aarch64 packages
-            install_packages: "gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross libstdc++-*-dev-arm64-cross"
+          #- name: aarch64-generic
+          #  triplet: aarch64-linux-gnu
+          #  compiler: gcc-aarch64-linux-gnu
+          #  cflags_extra: ""
+          #  package_arch: arm64 # Debian/Ubuntu uses arm64 for aarch64 packages
+          #  install_packages: "gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross libstdc++-*-dev-arm64-cross"
           - name: m68k-generic
             triplet: m68k-linux-gnu
             compiler: gcc-m68k-linux-gnu
