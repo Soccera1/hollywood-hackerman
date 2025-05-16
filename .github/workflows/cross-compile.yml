@@ -66,7 +66,7 @@ jobs:
             install_packages: "gcc-m68k-linux-gnu g++-m68k-linux-gnu libc6-dev-m68k-cross libstdc++-*-dev-m68k-cross"
           - name: ppc-generic
             triplet: powerpc-linux-gnu # 32-bit PowerPC
-            compiler: gcc-powerpc-linux-gnu
+            compiler: powerpc-linux-gnu-gcc
             cflags_extra: ""
             package_arch: powerpc
             install_packages: "gcc-powerpc-linux-gnu g++-powerpc-linux-gnu libc6-dev-powerpc-cross libstdc++-*-dev-powerpc-cross"
