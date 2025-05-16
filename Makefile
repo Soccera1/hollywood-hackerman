@@ -1,6 +1,6 @@
 # Hollywood-Hackerman Makefile
 
-CC = gcc
+CC ?= gcc
 CFLAGS = -Wall -Wextra -O3 -flto
 TARGET = hhm
 SRC = hhm.c
